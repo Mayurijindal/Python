@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+df = pd.read_csv('sales_data.csv')
+
+
+total_sales_per_product = df.groupby('Product')['Sales'].sum()
+print("Total Sales per Product:")
+print(total_sales_per_product)
+
+sales_trends_over_time = df.groupby('Date')['Sales'].sum()
+print("\nSales Trends over Time:")
+print(sales_trends_over_time)
+
+# For generating the plots
+plt.figure(figsize=(10, 6))
+
+# Total sales per product bar chart
+plt.subplot(1, 2, 1)
+total_sales_per_product.plot(kind='bar')
+plt.title('Total Sales per Product')
+plt.xlabel('Product')
+plt.ylabel('Total Sales')
+plt.savefig('total_sales_per_product.png')
+
+# Sales trends over time line plot
+plt.subplot(1, 2, 2)
+sales_trends_over_time.plot(kind='line')
+plt.title('Sales Trends over Time')
+plt.xlabel('Date')
+plt.ylabel('Total Sales')
+plt.savefig('sales_trends_over_time.png')
+
+plt.show()
